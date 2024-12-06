@@ -37,16 +37,16 @@ export default function Header() {
 
   return (
     <header className="bg-gray-900 p-4">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link to="/" className="text-green-500 text-2xl font-bold">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
+        <Link to="/" className="text-green-500 text-2xl font-bold mb-2 md:mb-0">
           Radios GeorgeFctech!
         </Link>
-        <div className="relative flex-1 max-w-2xl mx-4">
+        <div className="relative flex-1 max-w-lg mx-4 w-full">
           <input
             type="text"
             value={searchQuery}
             onChange={handleSearch}
-            placeholder="Procurar estações, podcasts,da Radios do Georgefctech..."
+            placeholder="Procurar estações, podcasts, da Radios do Georgefctech..."
             className="w-full px-4 py-2 rounded-lg bg-white text-gray-800 focus:outline-none"
           />
           <MagnifyingGlassIcon className="h-6 w-6 absolute right-3 top-2 text-gray-500" />
