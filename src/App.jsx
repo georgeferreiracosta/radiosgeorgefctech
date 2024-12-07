@@ -20,11 +20,13 @@ function App() {
         <Player />
 
         {/* Conteúdo principal */}
-        <div className="flex-grow pt-32">
+        <div className="flex-grow pt-32 px-4 sm:px-6 lg:px-8">
           {/* Cabeçalho */}
           <Header />
+
           {/* Navegação */}
           <Navigation />
+
           {/* Rotas principais */}
           <main className="pb-20">
             <Routes>
