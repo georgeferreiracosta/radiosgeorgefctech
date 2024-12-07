@@ -48,7 +48,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <p className="text-sm">
-          © {new Date().getFullYear()} Radios GeorgeFctech. Todos os direitos
+          © {new Date().getFullYear()} GeorgeFctech Programador FullStack. Todos os direitos
           reservados.
         </p>
       </div>

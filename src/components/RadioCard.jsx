@@ -15,9 +15,12 @@ export default function RadioCard({ station, rank }) {
       <div className="bg-gray-800 rounded-lg overflow-hidden transition-transform duration-200 group-hover:scale-105">
         <div className="relative">
           <img
-            src={station.favicon || `https://placehold.co/400x400/111827/FFFFFF/png?text=${station.name}`}
+            src={
+              station.favicon ||
+              `https://placehold.co/300x300/111827/FFFFFF/png?text=${station.name}`
+            }
             alt={station.name}
-            className="w-full h-48 object-cover"
+            className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover rounded-full" // Altura ajustada
           />
           <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-opacity">
             <button
@@ -30,8 +33,10 @@ export default function RadioCard({ station, rank }) {
         </div>
         <div className="p-4">
           <span className="text-green-500 font-bold">{rank}</span>
-          <h3 className="text-white font-semibold mt-2">{station.name}</h3>
-          <p className="text-gray-400 text-sm">{station.country}</p>
+          <h3 className="text-white font-semibold mt-2 text-sm sm:text-base">
+            {station.name}
+          </h3>
+          <p className="text-gray-400 text-xs sm:text-sm">{station.country}</p>
         </div>
       </div>
     </div>

@@ -80,63 +80,69 @@ export default function Player() {
 
   return (
     <div className="fixed top-0 left-0 right-0 bg-gray-800 border-b-4 border-green-500 z-50">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          {/* Logo e nome da rádio */}
-          <div className="flex items-center">
-            <img
-              src={
-                currentStation.favicon ||
-                "https://placehold.co/50x50/111827/FFFFFF/png?text=Radio"
-              }
-              alt="Station logo"
-              className="w-12 h-12 rounded"
-            />
-            <div className="ml-4">
-              <h3 className="text-white font-medium text-lg">
-                {currentStation.name}
-              </h3>
-              <p className="text-gray-400 text-sm">{currentStation.country}</p>
-            </div>
-          </div>
-
-          {/* Controles do player */}
-          <div className="flex items-center space-x-4">
-            {/* Botão Play/Pause */}
-            <button
-              onClick={togglePlay}
-              className="bg-green-500 rounded-full p-3 hover:bg-green-600 transition-colors"
-            >
-              {isPlaying ? (
-                <PauseIcon className="h-6 w-6 text-white" />
-              ) : (
-                <PlayIcon className="h-6 w-6 text-white" />
-              )}
-            </button>
-
-            {/* Controle de Volume */}
-            <div className="flex items-center">
-              <button onClick={toggleMute} className="p-2">
-                {isMuted ? (
-                  <SpeakerXMarkIcon className="h-6 w-6 text-gray-400" />
-                ) : (
-                  <SpeakerWaveIcon className="h-6 w-6 text-gray-400" />
-                )}
-              </button>
-              <input
-                type="range"
-                className="ml-2 w-24"
-                min="0"
-                max="100"
-                value={volume}
-                onChange={handleVolumeChange}
-                disabled={isMuted}
-              />
-            </div>
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo e nome da rádio */}
+        <div className="flex items-center">
+          <img
+            src={
+              currentStation.favicon ||
+              "https://placehold.co/50x50/111827/FFFFFF/png?text=Radio"
+            }
+            alt="Station logo"
+            className="w-12 h-12 rounded"
+          />
+          <div className="ml-4">
+            <h3 className="text-white font-medium text-lg">
+              {currentStation.name}
+            </h3>
+            <p className="text-gray-400 text-sm">{currentStation.country}</p>
           </div>
         </div>
-        <audio ref={audioRef} />
+
+        {/* Controles do player */}
+        <div className="flex items-center space-x-4">
+          {/* Equalizador dinâmico */}
+          {isPlaying && (
+            <img
+              src="https://br.radio.net/assets/images/ani_equalizer_green.gif"
+              alt="Equalizer"
+              className="w-8 h-8"
+            />
+          )}
+
+          {/* Botão Play/Pause */}
+          <button
+            onClick={togglePlay}
+            className="bg-green-500 rounded-full p-3 hover:bg-green-600 transition-colors"
+          >
+            {isPlaying ? (
+              <PauseIcon className="h-6 w-6 text-white" />
+            ) : (
+              <PlayIcon className="h-6 w-6 text-white" />
+            )}
+          </button>
+
+          {/* Controle de Volume */}
+          <div className="flex items-center">
+            <button onClick={toggleMute} className="p-2">
+              {isMuted ? (
+                <SpeakerXMarkIcon className="h-6 w-6 text-gray-400" />
+              ) : (
+                <SpeakerWaveIcon className="h-6 w-6 text-gray-400" />
+              )}
+            </button>
+            <input
+              type="range"
+              className="ml-2 w-24"
+              min="0"
+              max="100"
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+          </div>
+        </div>
       </div>
+      <audio ref={audioRef}></audio>
     </div>
   );
 }
