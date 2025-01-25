@@ -8,49 +8,23 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-4 hidden md:block">
+    <footer className="bg-gray-800 text-white py-4">
       <div className="container mx-auto text-center">
-        {/* Social Icons */}
-        <div className="flex justify-center space-x-6 mb-2">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-500"
-          >
-            <FaFacebookF className="w-6 h-6" />
+        <p>&copy; 2023 Radio Georgefctech. Todos os direitos reservados.</p>
+        <div className="flex justify-center space-x-4 mt-2">
+          <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <FaFacebookF />
           </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-500"
-          >
-            <FaTwitter className="w-6 h-6" />
+          <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <FaTwitter />
           </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-500"
-          >
-            <FaInstagram className="w-6 h-6" />
+          <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <FaInstagram />
           </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-green-500"
-          >
-            <FaLinkedinIn className="w-6 h-6" />
+          <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <FaLinkedinIn />
           </a>
         </div>
-
-        {/* Copyright */}
-        <p className="text-sm">
-          © {new Date().getFullYear()} GeorgeFctech Programador FullStack. Todos os direitos
-          reservados.
-        </p>
       </div>
     </footer>
   );
