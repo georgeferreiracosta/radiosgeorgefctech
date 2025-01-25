@@ -26,10 +26,6 @@ export default function Header() {
 
   return (
     <header className="bg-gray-900 p-4">
-      <h1 className="text-green-500 text-3xl font-bold text-center mb-4">
-          Radios GeorgefcTech
-      </h1>
-      
       <div className="flex items-center">
         <MagnifyingGlassIcon className="h-6 w-6 text-white" />
         <input
