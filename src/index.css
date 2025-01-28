@@ -8,7 +8,6 @@
     padding: 10px;
   }
 
-  /* Ajustes adicionais para dispositivos móveis */
   body {
     font-size: 14px; /* Ajuste o tamanho da fonte para telas menores */
   }
@@ -33,11 +32,12 @@ body {
     "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #111827;
+  background-color: #111827; /* Cor de fundo de fallback */
   background-image: url("https://example.com/path/to/your/image.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover; /* Faz a imagem cobrir todo o fundo */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem */
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura total da tela */
 }
 
 input[type="range"] {
