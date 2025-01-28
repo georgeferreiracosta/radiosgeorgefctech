@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import RadioCard from './RadioCard';
-import { getTopStations } from '../services/radioService';
+import React, { useEffect, useState } from "react";
+import RadioCard from "./RadioCard";
+import { getTopStations } from "../services/radioService";
 
 export default function RadioGrid() {
   const [stations, setStations] = useState([]);
@@ -15,7 +15,7 @@ export default function RadioGrid() {
         setStations(data);
         setFilteredStations(data); // Inicialmente, exibe todas as estações
       } catch (error) {
-        console.error('Erro ao buscar estações:', error);
+        console.error("Erro ao buscar estações:", error);
       } finally {
         setLoading(false);
       }
@@ -49,7 +49,7 @@ export default function RadioGrid() {
       {/* Imagem no topo da página */}
       <div className="mb-6">
         <img
-          src="https://s2.glbimg.com/Z4sqYVJ1cMYokTz2NoUnB7bOGsw=/s.glbimg.com/og/rg/f/original/2014/11/13/eswe.jpg" // Substitua pelo URL da imagem que você deseja
+          src="https://maxcast.com.br/blog/wp-content/uploads/2018/05/5-dicas-para-montar-seu-estudio-de-radio-online.jpeg" // Substitua pelo URL da imagem que você deseja
           alt="Imagem de topo"
           className="w-full h-auto rounded-lg"
         />
@@ -91,7 +91,11 @@ export default function RadioGrid() {
       {filteredStations.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredStations.map((station, index) => (
-            <RadioCard key={station.stationuuid} station={station} rank={index + 1} />
+            <RadioCard
+              key={station.stationuuid}
+              station={station}
+              rank={index + 1}
+            />
           ))}
         </div>
       ) : (
