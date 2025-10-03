@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  body {
+    font-size: 14px; /* Ajuste o tamanho da fonte para telas menores */
+  }
+
+  input[type="range"] {
+    height: 3px; /* Reduzir a altura do controle deslizante */
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    height: 10px; /* Ajuste o tamanho do polegar do controle deslizante */
+    width: 10px;
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #111827; /* Cor de fundo de fallback */
+  background-image: url("https://maxcast.com.br/blog/wp-content/uploads/2018/05/5-dicas-para-montar-seu-estudio-de-radio-online.jpeg");
+  background-size: cover; /* Faz a imagem cobrir todo o fundo */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem */
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura total da tela */
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  background: #4b5563;
+  border-radius: 2px;
+  background-image: linear-gradient(#22c55e, #22c55e);
+  background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  cursor: pointer;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}

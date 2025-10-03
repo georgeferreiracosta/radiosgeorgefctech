@@ -1,0 +1,3 @@
+- [x] Modify Navigation.jsx to change YouTube and G1 links to external URLs with target="_blank"
+- [x] Remove routes for /youtube and /g1 from App.jsx
+- [x] Delete YouTubePage.jsx and G1Page.jsx files
