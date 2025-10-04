@@ -5,6 +5,7 @@ export default function TopBar() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [city, setCity] = useState('Carregando...');
 
   // Atualizar relógio a cada segundo
   useEffect(() => {
@@ -15,34 +16,67 @@ export default function TopBar() {
     return () => clearInterval(timer);
   }, []);
 
-  // Buscar dados do clima
+  // Buscar dados do clima e localização
   useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        // Usando Open-Meteo API (gratuita, sem necessidade de chave)
-        // Coordenadas padrão para São Paulo, Brasil
-        const lat = -23.5505;
-        const lon = -46.6333;
-        
-        const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=America/Sao_Paulo`
-        );
-        
-        if (response.ok) {
-          const data = await response.json();
-          setWeather(data.current_weather);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados do clima:", error);
-      } finally {
+    const fetchWeatherAndLocation = async () => {
+      if (!navigator.geolocation) {
         setLoading(false);
+        setCity('Geolocalização não suportada');
+        return;
       }
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // Buscar clima
+          try {
+            const response = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=America/Sao_Paulo`
+            );
+
+            if (response.ok) {
+              const data = await response.json();
+              setWeather(data.current_weather);
+            }
+          } catch (error) {
+            console.error("Erro ao buscar dados do clima:", error);
+          }
+
+          // Geocodificação reversa para obter nome da cidade
+          try {
+            const geoResponse = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1`
+            );
+
+            if (geoResponse.ok) {
+              const geoData = await geoResponse.json();
+              const cityName = geoData.display_name ? geoData.display_name.split(',')[0] : 'Localização desconhecida';
+              const country = geoData.address?.country || '';
+              setCity(`${cityName}, ${country}`);
+            } else {
+              setCity('Localização indisponível');
+            }
+          } catch (error) {
+            console.error("Erro na geocodificação reversa:", error);
+            setCity('Localização indisponível');
+          }
+
+          setLoading(false);
+        },
+        (error) => {
+          console.error("Erro na geolocalização:", error);
+          setLoading(false);
+          setCity('Localização indisponível');
+        }
+      );
     };
 
-    fetchWeather();
-    // Atualizar clima a cada 30 minutos
-    const weatherTimer = setInterval(fetchWeather, 30 * 60 * 1000);
-    
+    fetchWeatherAndLocation();
+    // Atualizar clima e localização a cada 30 minutos
+    const weatherTimer = setInterval(fetchWeatherAndLocation, 30 * 60 * 1000);
+
     return () => clearInterval(weatherTimer);
   }, []);
 
@@ -105,7 +139,10 @@ export default function TopBar() {
           </div>
 
           {/* Clima */}
-          <div className="flex items-center justify-end space-x-3">
+          <div
+            className="flex items-center justify-end space-x-3 cursor-pointer"
+            onClick={() => window.open('https://www.msn.com/pt-br/clima/forecast/in-Boituva,S%C3%A3o-Paulo?loc=eyJsIjoiQm9pdHV2YSIsInIiOiJTw6NvIFBhdWxvIiwiYyI6IkJyYXNpbCIsImkiOiJCUiIsImciOiJwdC1iciIsIngiOiItNDcuNjg3NSIsInkiOiItMjMuMjkxMDk5NTQ4MzM5ODQ0In0%3D&weadegreetype=C&ocid=msnheader&cvid=68e05b6cffa54523884c89429435b04f', '_blank')}
+          >
             <CloudIcon className="h-6 w-6 text-indigo-300" />
             <div className="text-right">
               {loading ? (
@@ -121,7 +158,7 @@ export default function TopBar() {
                     </span>
                   </div>
                   <div className="text-sm text-indigo-200">
-                    São Paulo, BR
+                    {city}
                   </div>
                 </>
               ) : (

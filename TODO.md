@@ -1,3 +1,5 @@
-- [x] Modify Navigation.jsx to change YouTube and G1 links to external URLs with target="_blank"
-- [x] Remove routes for /youtube and /g1 from App.jsx
-- [x] Delete YouTubePage.jsx and G1Page.jsx files
+- [x] Modificar TopBar.jsx para adicionar geolocalização em tempo real
+- [x] Implementar geocodificação reversa para obter nome da cidade
+- [x] Tornar a seção de clima clicável para redirecionar à página MSN
+- [x] Atualizar exibição para mostrar localização dinâmica
+- [x] Testar funcionalidade de geolocalização e redirecionamento
