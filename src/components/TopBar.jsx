@@ -16,66 +16,34 @@ export default function TopBar() {
     return () => clearInterval(timer);
   }, []);
 
-  // Buscar dados do clima e localização
+  // Buscar dados do clima
   useEffect(() => {
-    const fetchWeatherAndLocation = async () => {
-      if (!navigator.geolocation) {
-        setLoading(false);
-        setCity('Geolocalização não suportada');
-        return;
+    const fetchWeather = async () => {
+      // Coordenadas de Boituva, SP (aproximadas)
+      const lat = -23.2911;
+      const lon = -47.6875;
+
+      // Buscar clima
+      try {
+        const response = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=America/Sao_Paulo`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setWeather(data.current_weather);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do clima:", error);
       }
 
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-
-          // Buscar clima
-          try {
-            const response = await fetch(
-              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=America/Sao_Paulo`
-            );
-
-            if (response.ok) {
-              const data = await response.json();
-              setWeather(data.current_weather);
-            }
-          } catch (error) {
-            console.error("Erro ao buscar dados do clima:", error);
-          }
-
-          // Geocodificação reversa para obter nome da cidade
-          try {
-            const geoResponse = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1`
-            );
-
-            if (geoResponse.ok) {
-              const geoData = await geoResponse.json();
-              const cityName = geoData.display_name ? geoData.display_name.split(',')[0] : 'Localização desconhecida';
-              const country = geoData.address?.country || '';
-              setCity(`${cityName}, ${country}`);
-            } else {
-              setCity('Localização indisponível');
-            }
-          } catch (error) {
-            console.error("Erro na geocodificação reversa:", error);
-            setCity('Localização indisponível');
-          }
-
-          setLoading(false);
-        },
-        (error) => {
-          console.error("Erro na geolocalização:", error);
-          setLoading(false);
-          setCity('Localização indisponível');
-        }
-      );
+      setCity('Boituva, SP');
+      setLoading(false);
     };
 
-    fetchWeatherAndLocation();
-    // Atualizar clima e localização a cada 30 minutos
-    const weatherTimer = setInterval(fetchWeatherAndLocation, 30 * 60 * 1000);
+    fetchWeather();
+    // Atualizar clima a cada 30 minutos
+    const weatherTimer = setInterval(fetchWeather, 30 * 60 * 1000);
 
     return () => clearInterval(weatherTimer);
   }, []);
