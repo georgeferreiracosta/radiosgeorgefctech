@@ -1,0 +1,5 @@
+- [x] Modificar TopBar.jsx para adicionar geolocalização em tempo real
+- [x] Implementar geocodificação reversa para obter nome da cidade
+- [x] Tornar a seção de clima clicável para redirecionar à página MSN
+- [x] Atualizar exibição para mostrar localização dinâmica
+- [x] Testar funcionalidade de geolocalização e redirecionamento
